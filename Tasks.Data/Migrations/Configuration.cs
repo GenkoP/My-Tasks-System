@@ -21,9 +21,15 @@ namespace Tasks.Data.Migrations
         {
             //TaskManagerData data = new TaskManagerData();
 
-            //data.Tasks.Add(new MyTask { Preority = PreorityType.Important,
-            //                             Title = "Must get up early!"});
+            //data.Tasks.Add(new MyTask
+            //{
+            //    Preority = PreorityType.Important,
+            //    Title = "Must get up early!",
+            //     DateOnCreate = DateTime.Now,
+            //     DateToEnd = DateTime.Now,
+            //});
 
+            //data.SaveChanges();
 
 
 

@@ -18,12 +18,6 @@
             this.repositories = new Dictionary<Type, object>();
         }
 
-        public TaskManagerData()
-            : this(new DataContext())
-        {
-
-        }
-
         public IGenericRepository<MyTask> Tasks
         {
             get { return this.GetRepository<MyTask>(); }
