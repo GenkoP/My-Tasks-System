@@ -22,9 +22,9 @@
 
         public string Description { get; set; }
 
-        public DateTime DateOnCreate { get; set; }
+        public DateTime? DateOnCreate { get; set; }
 
-        public DateTime DateToEnd { get; set; }
+        public DateTime? DateToEnd { get; set; }
 
         [DefaultValue(PreorityType.Medium)]
         public PreorityType Preority { get; set; }

@@ -13,9 +13,9 @@
 
         public string Description { get; set; }
 
-        public DateTime DateOnCreate { get; set; }
+        public DateTime? DateOnCreate { get; set; }
 
-        public DateTime DateToEnd { get; set; }
+        public DateTime? DateToEnd { get; set; }
 
         public PreorityType Type { get; set; }
 
