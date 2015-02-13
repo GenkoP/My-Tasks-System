@@ -1,19 +1,24 @@
 ﻿namespace Tasks.WebClient
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
+    using System.Collections.Generic;
+   
     using System.Web;
     using System.Web.Http;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
 
+    using Tasks.WebClient.App_Start;
 
-    public class MvcApplication : System.Web.HttpApplication
+
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
+            ViewEnginesConfiguration.RegisterViewEngines(ViewEngines.Engines);
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
