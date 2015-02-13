@@ -35,7 +35,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -50,7 +65,33 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DataTests\TestDeletingMyTasksFromData.cs" />
+    <Compile Include="DataTests\UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DataTests\TestUoWAdding.cs" />
+    <Compile Include="DataTests\BaseTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tasks.Common\Tasks.Common.csproj">
+      <Project>{34dd2919-04db-456b-9042-2aad701fb044}</Project>
+      <Name>Tasks.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tasks.Data\Tasks.Data.csproj">
+      <Project>{3cce3624-c2fb-49d2-9ab8-b9a4ceedd1a7}</Project>
+      <Name>Tasks.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tasks.Models\Tasks.Models.csproj">
+      <Project>{58e70733-c3e9-488f-9b70-a8b5c08f7aeb}</Project>
+      <Name>Tasks.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tasks.WebClient\Tasks.WebClient.csproj">
+      <Project>{3d00f7df-ad3a-45a6-baaf-0822f622379e}</Project>
+      <Name>Tasks.WebClient</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

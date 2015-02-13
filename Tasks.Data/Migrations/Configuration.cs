@@ -16,7 +16,6 @@ namespace Tasks.Data.Migrations
     {
         private UserManager<User> userManager;
         private const string USER_EMAIL = "some@mail.com";
-        private const string USER_NAME = "GenkoP";
 
         public Configuration()
         {
