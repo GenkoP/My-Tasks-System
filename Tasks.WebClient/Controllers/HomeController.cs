@@ -7,21 +7,27 @@
     using System.Web.Mvc;
 
     using Tasks.Data.Repositories;
+    using Tasks.WebClient.Providers;
+    using Tasks.WebClient.Models.ViewModels;
 
     public class HomeController : BaseController
     {
 
-        public HomeController(ITaskManagerData data)
-            : base(data)
+        public HomeController(ITaskManagerData data, ICurrentUserIdProvider userId)
+            : base(data, userId)
         {
 
         }
 
         public ActionResult Index()
         {
-            var allTasks = this.data.Tasks.All();
+            string currentUserId = this.CurrentUser.GetUserId();
 
-            return View(allTasks);
+            var allTasks = this.Data.Tasks.All()
+                .Where(x => x.UserID == currentUserId && x.DateToEnd >= DateTime.Now)
+                .Select(MyTaskViewModelHomeIndex.GetTasks);
+
+           return View(allTasks);
         }
 
         public ActionResult About()

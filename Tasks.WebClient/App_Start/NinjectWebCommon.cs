@@ -13,6 +13,7 @@ namespace Tasks.WebClient.App_Start
 
     using Tasks.Data;
     using Tasks.Data.Repositories;
+    using Tasks.WebClient.Providers;
 
     public static class NinjectWebCommon 
     {
@@ -66,6 +67,7 @@ namespace Tasks.WebClient.App_Start
         {
             kernel.Bind<IDataContext>().To<DataContext>();
             kernel.Bind<ITaskManagerData>().To<TaskManagerData>();
+            kernel.Bind<ICurrentUserIdProvider>().To<CurrentUserIdProvider>();
 
         }        
     }

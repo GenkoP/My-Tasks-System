@@ -1,14 +1,32 @@
-﻿@model IQueryable<Tasks.Models.MyTask>
+﻿@using Microsoft.AspNet.Identity
+
+@model IQueryable<Tasks.WebClient.Models.ViewModels.MyTaskViewModelHomeIndex>
 
 @{
     ViewBag.Title = "Home Page";
+
 }
 
-@foreach (var tasks in Model)
+@if (Request.IsAuthenticated)
 {
-    <div>
-        <p>Title </p>
-        <p>@tasks.Title </p>
+
+    <h1>Current Tasks</h1>
+
+    <div class="row">
+        @Html.Partial("_MyTaskBasicPartial", Model)
     </div>
 
 }
+else
+{
+<div class="jumbotron">
+    <h1>Welcome to task system! </h1>
+    <h2>Organize your day!</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id sagittis purus. Morbi vel tristique felis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut et urna diam. Ut maximus risus ut auctor dapibus. Donec velit velit, pulvinar vitae lorem eget, ornare interdum lacus. Nunc in nisl ac nunc cursus elementum. Nam sed lectus vitae nisi lacinia efficitur vitae sit amet magna. Vivamus fermentum nisi quis dolor consectetur eleifend.</p>
+</div>
+    
+    
+    
+}
+
+
