@@ -1,0 +1,10 @@
+﻿
+@model IQueryable<Tasks.WebClient.Models.ViewModels.MyTaskViewModelHomeIndex>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Baba Meca view </h2>
+ <div class="row">
+     @Html.Partial("_MyTaskBasicPartial", Model)
+ </div>
