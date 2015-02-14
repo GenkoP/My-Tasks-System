@@ -1,10 +1,13 @@
-﻿
-@model IQueryable<Tasks.WebClient.Models.ViewModels.MyTaskViewModelHomeIndex>
+﻿@model IQueryable<Tasks.WebClient.Models.ViewModels.MyTaskViewModel>
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Baba Meca view </h2>
+
  <div class="row">
-     @Html.Partial("_MyTaskBasicPartial", Model)
+    @foreach (var task in Model)
+    {
+         @Html.Partial("_ListOfMyTaskPartial", task)
+    }
  </div>

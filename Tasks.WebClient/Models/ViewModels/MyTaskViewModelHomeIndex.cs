@@ -8,14 +8,14 @@
 
     using Tasks.Models;
 
-    public class MyTaskViewModelHomeIndex
+    public class MyTaskViewModel
     {
         
-        public static Expression<Func<MyTask, MyTaskViewModelHomeIndex>> GetTasks
+        public static Expression<Func<MyTask, MyTaskViewModel>> GetTasks
         {
             get
             {
-                return task => new MyTaskViewModelHomeIndex
+                return task => new MyTaskViewModel
                 {
                     ID = task.ID,
                     Title = task.Title,
@@ -29,8 +29,11 @@
 
         public int ID { get; set; }
 
+        [Required]
+        [StringLength(30, MinimumLength = 2)]
         public string Title { get; set; }
 
+        [StringLength(600)]
         public string Description { get; set; }
 
         public DateTime? DateToEnd { get; set; }

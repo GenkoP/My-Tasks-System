@@ -16,12 +16,9 @@
         [StringLength(600)]
         public string Description { get; set; }
 
-        public DateTime DateOnCreate { get; set; }
-
         public DateTime? DateToEnd { get; set; }
 
        public PreorityType Preority { get; set; }
 
-        public string UserID { get; set; }
     }
 }

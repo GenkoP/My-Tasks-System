@@ -1,0 +1,46 @@
+﻿@using Tasks.WebClient.Models.ViewModels
+
+@model MyTaskViewModel
+
+
+    <div class="col-md-4">
+        <h2>@Model.Title</h2>
+        <div>
+            <p>Preority: @Model.Preority</p>
+        </div>
+        <div>
+            <p>Description: @Model.Description</p>
+        </div>
+        <div>
+            @if (Model.DateToEnd == null)
+            {
+                <p>Every day should perform this task! </p>
+            }
+            else
+            {
+                <p>Date to end: @Model.DateToEnd</p>
+            }
+        </div>
+
+
+
+        <div class="row" >
+
+            <div class="col-md-6">
+                <a href="@Url.Action("Update", "Tasks", new { Model.ID })" class="btn btn-primary ">
+                    <span>Update</span>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="@Url.Action("Delete", "Tasks", new { Model.ID })" class="btn btn-danger ">
+                    <span>Delete</span>
+                </a>
+            </div>
+
+
+        </div>
+        
+        
+    
+</div>
+

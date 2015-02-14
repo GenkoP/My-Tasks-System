@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 
-@model IQueryable<Tasks.WebClient.Models.ViewModels.MyTaskViewModelHomeIndex>
+@model IQueryable<Tasks.WebClient.Models.ViewModels.MyTaskViewModel>
 
 @{
     ViewBag.Title = "Home Page";
@@ -13,7 +13,11 @@
     <h1>Current Tasks</h1>
 
     <div class="row">
-        @Html.Partial("_MyTaskBasicPartial", Model)
+        @foreach (var task in Model)
+        {
+            @Html.Partial("_ListOfMyTaskPartial", task)
+        }
+       
     </div>
 
 }

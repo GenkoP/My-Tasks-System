@@ -31,7 +31,7 @@
             var currentTasks = this.Data.Tasks.All()
                 .Where(x => x.DateToEnd > DateTime.Now && x.UserID == currentUserId)
                 .OrderBy(x => x.Preority)
-                .Select(MyTaskViewModelHomeIndex.GetTasks);
+                .Select(MyTaskViewModel.GetTasks);
 
 
             return View(currentTasks);
@@ -74,7 +74,7 @@
             return RedirectToAction("Index");
         }
         
-       // [HttpDelete]
+      
         public ActionResult Delete(int id)
         {
 
@@ -95,5 +95,55 @@
             return RedirectToAction("Index");
 
         }
+
+        [HttpGet]
+        public  ActionResult Update(int id)
+        {
+            var currnetUserId = this.CurrentUser.GetUserId();
+
+            var task = this.Data.Tasks.SearchFor(x => x.UserID == currnetUserId && x.ID == id)
+                .Select(MyTaskViewModel.GetTasks)
+                .FirstOrDefault();
+            if (task == null)
+            {
+                return View("Error");
+            }
+
+            return View(task);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(MyTaskViewModel task)
+        {
+            if (!ModelState.IsValid)
+            {
+
+                return View("Error");
+            }
+
+            var currnetUserId = this.CurrentUser.GetUserId();
+
+            var updatedTask = this.Data.Tasks.SearchFor(x => x.UserID == currnetUserId && x.ID == task.ID)
+                .FirstOrDefault();
+
+            if (updatedTask == null)
+            {
+                return View("Error");
+            }
+
+            updatedTask.Title = task.Title;
+            updatedTask.Description = task.Description;
+            updatedTask.Preority = task.Preority;
+            updatedTask.DateToEnd = task.DateToEnd;
+
+            this.Data.Tasks.Update(updatedTask);
+            this.Data.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

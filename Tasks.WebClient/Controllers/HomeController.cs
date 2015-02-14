@@ -25,7 +25,7 @@
 
             var allTasks = this.Data.Tasks.All()
                 .Where(x => x.UserID == currentUserId && x.DateToEnd >= DateTime.Now)
-                .Select(MyTaskViewModelHomeIndex.GetTasks);
+                .Select(MyTaskViewModel.GetTasks);
 
            return View(allTasks);
         }

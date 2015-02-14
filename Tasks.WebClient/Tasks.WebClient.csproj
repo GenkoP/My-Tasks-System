@@ -272,10 +272,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_MyTaskBasicPartial.cshtml" />
+    <Content Include="Views\Shared\_ListOfMyTaskPartial.cshtml" />
     <Content Include="Views\Shared\_RegistrationPartial.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Tasks\Create.cshtml" />
+    <Content Include="Views\Tasks\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
