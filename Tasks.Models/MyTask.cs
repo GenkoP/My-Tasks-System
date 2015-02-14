@@ -29,7 +29,7 @@
 
         public DateTime? DateToEnd { get; set; }
 
-        [DefaultValue(PreorityType.Medium)]
+        [DefaultValue(2)]
         public PreorityType Preority { get; set; }
 
         [Required]

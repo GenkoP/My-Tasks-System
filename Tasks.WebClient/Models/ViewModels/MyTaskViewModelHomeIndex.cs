@@ -17,15 +17,17 @@
             {
                 return task => new MyTaskViewModelHomeIndex
                 {
+                    ID = task.ID,
                     Title = task.Title,
                     Description = task.Description,
                     DateToEnd = task.DateToEnd,
                     Preority = task.Preority,
-                    
                 };
 
             }
         }
+
+        public int ID { get; set; }
 
         public string Title { get; set; }
 

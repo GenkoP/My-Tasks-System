@@ -16,11 +16,11 @@
     [Authorize]
     public class TasksController : BaseController
     {
-
+        
         public TasksController(ITaskManagerData data, ICurrentUserIdProvider userId)
             : base(data, userId)
         {
-
+            
         }
 
         [HttpGet]
@@ -73,6 +73,27 @@
 
             return RedirectToAction("Index");
         }
+        
+       // [HttpDelete]
+        public ActionResult Delete(int id)
+        {
 
+            var currnetUserId = this.CurrentUser.GetUserId();
+
+            var task = this.Data.Tasks.SearchFor(x => x.UserID == currnetUserId && x.ID == id).FirstOrDefault();
+
+            if (task == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                this.Data.Tasks.Delete(task);
+                this.Data.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+
+        }
     }
 }
