@@ -29,14 +29,26 @@
             var currentUserId = this.CurrentUser.GetUserId();
 
             var currentTasks = this.Data.Tasks.All()
-                .Where(x => x.DateToEnd > DateTime.Now && x.UserID == currentUserId)
-                .OrderBy(x => x.Preority)
+                .Where(x => x.DateToEnd > DateTime.Now && x.UserID == currentUserId && x.IsCompleted == false)
+                .OrderByDescending(x => x.Preority == PreorityType.Important)
+                .OrderBy(x=> x.DateToEnd)
                 .Select(MyTaskViewModel.GetTasks);
 
 
             return View(currentTasks);
         }
 
+        public ActionResult Search(DateTime date)
+        {
+             var currentUserId = this.CurrentUser.GetUserId();
+
+             var currentTasks = this.Data.Tasks.All()
+                 .Where(x => x.DateToEnd == date && x.UserID == currentUserId && x.IsCompleted == false)
+                 .Select(MyTaskViewModel.GetTasks);
+
+             return this.PartialView("_ListOfMyTaskPartial", currentTasks);
+        }
+        
         [HttpGet]
         public ActionResult Create()
         {
@@ -144,6 +156,25 @@
             return RedirectToAction("Index");
         }
 
+        public ActionResult CheckTaskIsComplete(int id)
+        {
+            var currnetUserId = this.CurrentUser.GetUserId();
 
+            var task = this.Data.Tasks.SearchFor(x => x.UserID == currnetUserId && x.ID == id).FirstOrDefault();
+
+            task.IsCompleted = true;
+
+            if (task == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                this.Data.Tasks.Update(task);
+                this.Data.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -27,7 +27,10 @@
 
         public DateTime DateOnCreate { get; set; }
 
-        public DateTime? DateToEnd { get; set; }
+        public DateTime DateToEnd { get; set; }
+
+        [DefaultValue(false)]
+        public bool IsCompleted { get; set;}
 
         [DefaultValue(2)]
         public PreorityType Preority { get; set; }

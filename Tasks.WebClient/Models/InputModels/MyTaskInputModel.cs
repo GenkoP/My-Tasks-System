@@ -16,7 +16,9 @@
         [StringLength(600)]
         public string Description { get; set; }
 
-        public DateTime? DateToEnd { get; set; }
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "dd/MM/yyyy")]
+        public DateTime DateToEnd { get; set; }
 
        public PreorityType Preority { get; set; }
 

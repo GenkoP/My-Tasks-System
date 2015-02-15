@@ -33,7 +33,8 @@
     <div class="form-group">
         @Html.LabelFor(x => x.DateToEnd, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.EditorFor(x => x.DateToEnd, new { @class = "form-control" })
+           @* @Html.EditorFor(x => x.DateToEnd, new { @class = "form-control" })*@
+            <input type="text" name="DateToEnd" id="DateToEnd" />
         </div>
     </div>
     <div class="form-group">
@@ -45,5 +46,12 @@
 
 
 @section Scripts {
+    <script>
+
+        console.log($('#DateToEnd'));
+        $('#DateToEnd').datepicker({ dateFormat: 'dd/mm/yy' }).val();
+
+    </script>
+
     @Scripts.Render("~/bundles/jqueryval")
 }

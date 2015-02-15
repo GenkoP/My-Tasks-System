@@ -3,11 +3,48 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Baba Meca view </h2>
+<h2> My current tasks </h2>
 
- <div class="row">
-    @foreach (var task in Model)
+@Html.ActionLink("Add new task", "Create", "Tasks", new { @class = "btn btn-lg btn-primary" })
+
+<div>
+    @using (Ajax.BeginForm("Search", null,
+    new AjaxOptions
+        {
+            HttpMethod = "POST",
+            UpdateTargetId = "results",
+            InsertionMode = InsertionMode.Replace
+        }, new { id = "searchForm" }))
     {
-         @Html.Partial("_ListOfMyTaskPartial", task)
+        <input type="text" id="datepicker" name="date" onchange="changed()" />
+        <input type="submit" />
+
     }
- </div>
+</div>
+
+
+
+<div class="row" id="results">
+    @Html.Partial("_ListOfMyTaskPartial", Model)
+
+
+</div>
+
+
+@section scripts {
+
+    <script>
+
+        $('#datepicker').datepicker({ dateFormat: 'dd.mm.yy' }).val();
+
+
+        function changed() {
+
+            console.log($('#searchForm'));
+
+            $('#searchForm').submit();
+        }
+
+    </script>
+    
+}

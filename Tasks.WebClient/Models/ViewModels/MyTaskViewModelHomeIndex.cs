@@ -36,7 +36,7 @@
         [StringLength(600)]
         public string Description { get; set; }
 
-        public DateTime? DateToEnd { get; set; }
+        public DateTime DateToEnd { get; set; }
 
         public PreorityType Preority { get; set; }
 

@@ -8,7 +8,7 @@
 
     public abstract class BaseController : Controller
     {
-       
+
         private ITaskManagerData data;
         private ICurrentUserIdProvider currentUser;
 
@@ -28,6 +28,5 @@
         {
             get { return this.currentUser; }
         }
-
     }
 }

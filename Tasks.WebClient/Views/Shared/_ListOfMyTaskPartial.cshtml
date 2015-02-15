@@ -1,46 +1,44 @@
 ﻿@using Tasks.WebClient.Models.ViewModels
 
-@model MyTaskViewModel
+@model IQueryable<MyTaskViewModel>
 
 
-    <div class="col-md-4">
-        <h2>@Model.Title</h2>
-        <div>
-            <p>Preority: @Model.Preority</p>
-        </div>
-        <div>
-            <p>Description: @Model.Description</p>
-        </div>
-        <div>
-            @if (Model.DateToEnd == null)
-            {
-                <p>Every day should perform this task! </p>
-            }
-            else
-            {
-                <p>Date to end: @Model.DateToEnd</p>
-            }
-        </div>
+@foreach (var task in Model)
+{
+    <div class="col-md-4 tasks-collapse">
 
+        <a class="btn btn-danger btn-block" data-toggle="collapse" href="#collapse_@task.ID" aria-expanded="false" aria-controls="collapseExample">
+            <span>@task.Title</span>
+            <span> @task.DateToEnd.ToString("dd/MM/yyyy")</span>
+        </a>
+        <div class="collapse" id="collapse_@task.ID">
+            <div class="well">
+                <div>
+                    <p>Preority: @task.Preority</p>
+                </div>
+                <div>
+                    <p>Description: @task.Description</p>
+                </div>
 
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="@Url.Action("Update", "Tasks", new { task.ID })" class="btn btn-primary ">
+                            <span>Update</span>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="@Url.Action("CheckTaskIsComplete", "Tasks", new { task.ID })" class="btn btn-default ">
+                            <span>End task</span>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="@Url.Action("Delete", "Tasks", new { task.ID })" class="btn btn-danger ">
+                            <span>Delete</span>
+                        </a>
+                    </div>
+                </div>
 
-        <div class="row" >
-
-            <div class="col-md-6">
-                <a href="@Url.Action("Update", "Tasks", new { Model.ID })" class="btn btn-primary ">
-                    <span>Update</span>
-                </a>
             </div>
-            <div class="col-md-6">
-                <a href="@Url.Action("Delete", "Tasks", new { Model.ID })" class="btn btn-danger ">
-                    <span>Delete</span>
-                </a>
-            </div>
-
-
         </div>
-        
-        
-    
-</div>
-
+    </div>
+}
