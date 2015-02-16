@@ -20,7 +20,7 @@
 
         public DateTime? DateToEnd { get; set; }
 
-        public PreorityType Type { get; set; }
+        public PriorityType Type { get; set; }
 
         [Required]
         public int MyTaskID { get; set; }

@@ -10,6 +10,8 @@
     using Tasks.WebClient.Providers;
     using Tasks.WebClient.Models.InputModels;
     using Tasks.WebClient.Models.ViewModels;
+    using System.Data.Entity.Core.Objects;
+    using System.Data.Entity;
    
 
 
@@ -28,14 +30,16 @@
         {
             var currentUserId = this.CurrentUser.GetUserId();
 
+            var currnetDate = DateTime.Now.Date;
+
             var currentTasks = this.Data.Tasks
-                .SearchFor(x => x.DateToEnd > DateTime.Now 
+                .SearchFor(x => DbFunctions.TruncateTime(x.DateToEnd) >= DbFunctions.TruncateTime(currnetDate)
                                     && x.UserID == currentUserId 
                                     && x.IsCompleted == false
                                )
-                    .OrderByDescending(x => x.Preority == PreorityType.Important)
-                    .OrderBy(x=> x.DateToEnd)
-                    .Select(MyTaskViewModel.GetTasks);
+                    .GroupBy(x => x.DateToEnd)
+                    .Where(g => g.Count() >= 1)
+                    .Select(g => g.Key);
 
 
             return View(currentTasks);
@@ -67,7 +71,7 @@
                 DateOnCreate = DateTime.Now,
                 DateToEnd = task.DateToEnd,
                 Description = task.Description,
-                Preority = task.Preority,
+                Priority = task.Priority,
 
             };
 
@@ -139,7 +143,7 @@
 
             updatedTask.Title = task.Title;
             updatedTask.Description = task.Description;
-            updatedTask.Preority = task.Preority;
+            updatedTask.Priority = task.Priority;
             updatedTask.DateToEnd = task.DateToEnd;
 
             this.Data.Tasks.Update(updatedTask);

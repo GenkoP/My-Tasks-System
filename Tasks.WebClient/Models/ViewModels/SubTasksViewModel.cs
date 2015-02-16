@@ -30,7 +30,7 @@
 
         public DateTime? DateToEnd { get; set; }
 
-        public PreorityType Type { get; set; }
+        public PriorityType Type { get; set; }
 
     }
 }

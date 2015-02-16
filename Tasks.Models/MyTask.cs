@@ -33,7 +33,7 @@
         public bool IsCompleted { get; set;}
 
         [DefaultValue(2)]
-        public PreorityType Preority { get; set; }
+        public PriorityType Priority { get; set; }
 
         [Required]
         public string UserID { get; set; }

@@ -20,7 +20,7 @@
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "dd/MM/yyyy")]
         public DateTime DateToEnd { get; set; }
 
-       public PreorityType Preority { get; set; }
+       public PriorityType Priority { get; set; }
 
     }
 }

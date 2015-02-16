@@ -1,0 +1,57 @@
+﻿@model Tasks.WebClient.Models.ViewModels.MyTaskViewModel
+
+@{
+    string cssClass = "";
+    switch (Model.Priority)
+    {
+        case Tasks.Models.PriorityType.Low:
+            cssClass = "btn-info";
+            break;
+        case Tasks.Models.PriorityType.Medium:
+            cssClass = "btn-primary";
+            break;
+        case Tasks.Models.PriorityType.Important:
+            cssClass = "btn-danger";
+            break;
+        default:
+            break;
+    }
+    
+}
+
+<div class="col-md-4 tasks-collapse">
+
+    <a class="btn @cssClass btn-block" data-toggle="collapse" href="#collapse_@Model.ID" aria-expanded="false" aria-controls="collapseExample">
+        <span>@Model.Title</span>
+        <span> @Model.DateToEnd.ToString("dd/MM/yyyy")</span>
+    </a>
+    <div class="collapse" id="collapse_@Model.ID">
+        <div class="well">
+            <div>
+                <p>Priority: @Model.Priority</p>
+            </div>
+            <div>
+                <p>Description: @Model.Description</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="@Url.Action("Update", "Tasks", new { Model.ID })" class="btn btn-primary ">
+                        <span>Update</span>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="@Url.Action("CheckTaskIsComplete", "Tasks", new { Model.ID })" class="btn btn-default ">
+                        <span>End task</span>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="@Url.Action("Delete", "Tasks", new { Model.ID })" class="btn btn-danger ">
+                        <span>Delete</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

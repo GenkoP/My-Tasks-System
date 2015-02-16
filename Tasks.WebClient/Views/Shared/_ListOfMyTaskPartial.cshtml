@@ -2,43 +2,23 @@
 
 @model IQueryable<MyTaskViewModel>
 
-
-@foreach (var task in Model)
+@if (Model.Count() == 0)
 {
-    <div class="col-md-4 tasks-collapse">
-
-        <a class="btn btn-danger btn-block" data-toggle="collapse" href="#collapse_@task.ID" aria-expanded="false" aria-controls="collapseExample">
-            <span>@task.Title</span>
-            <span> @task.DateToEnd.ToString("dd/MM/yyyy")</span>
-        </a>
-        <div class="collapse" id="collapse_@task.ID">
-            <div class="well">
-                <div>
-                    <p>Preority: @task.Preority</p>
-                </div>
-                <div>
-                    <p>Description: @task.Description</p>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <a href="@Url.Action("Update", "Tasks", new { task.ID })" class="btn btn-primary ">
-                            <span>Update</span>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="@Url.Action("CheckTaskIsComplete", "Tasks", new { task.ID })" class="btn btn-default ">
-                            <span>End task</span>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="@Url.Action("Delete", "Tasks", new { task.ID })" class="btn btn-danger ">
-                            <span>Delete</span>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+    <h4>You no have tasks today</h4>
+    <div>
+        @Html.ActionLink("Add new task", "Create", "Tasks",null, new { @class = "btn btn-lg btn-primary" })
     </div>
+}
+else
+{
+
+
+    foreach (var task in Model)
+    {
+
+        @Html.Partial("_MyTaskPartial", task)
+      
+
+
+    }
 }

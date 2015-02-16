@@ -19,9 +19,9 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(x => x.Preority, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(x => x.Priority, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.EnumDropDownListFor(x => x.Preority, new { @class = "form-control" })
+            @Html.EnumDropDownListFor(x => x.Priority, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
@@ -33,7 +33,6 @@
     <div class="form-group">
         @Html.LabelFor(x => x.DateToEnd, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-           @* @Html.EditorFor(x => x.DateToEnd, new { @class = "form-control" })*@
             <input type="text" name="DateToEnd" id="DateToEnd" />
         </div>
     </div>

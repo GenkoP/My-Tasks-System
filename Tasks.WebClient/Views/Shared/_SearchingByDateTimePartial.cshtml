@@ -2,7 +2,7 @@
 
 @foreach (var date in Model)
 {
-
+    
     <div class="col-md-1">
 
         @Ajax.ActionLink(date.ToString("dd/MM/yyyy"), "SearchByDate", "Searching", new { date = date },

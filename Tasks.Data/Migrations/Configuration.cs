@@ -75,7 +75,7 @@ namespace Tasks.Data.Migrations
                     Title = "Must get up early!",
                     DateOnCreate = DateTime.Now,
                     DateToEnd = DateTime.Parse("16/02/2015"),
-                    Preority = PreorityType.Important,
+                    Priority = PriorityType.Important,
                     Description = "Must get up early, becouse I have to study ASP MVC5!"
                 });
 
@@ -85,7 +85,7 @@ namespace Tasks.Data.Migrations
                     Title = "Need to brush my teeth!",
                     DateOnCreate = DateTime.Now,
                     DateToEnd = DateTime.Parse("17/02/2015"),
-                    Preority = PreorityType.Important,
+                    Priority = PriorityType.Important,
                     Description = "need to brush my teeth, because it must be healthy!!!"
                 });
 
@@ -95,7 +95,7 @@ namespace Tasks.Data.Migrations
                     Title = "My mom have birthday!",
                     DateOnCreate = DateTime.Now,
                     DateToEnd = DateTime.Parse("18/02/2015"),
-                    Preority = PreorityType.Important,
+                    Priority = PriorityType.Important,
                     Description = "My mom have birthday, buy gift!"
                 });
 
@@ -121,7 +121,7 @@ namespace Tasks.Data.Migrations
                 Title = "I must go to interview!",
                 DateOnCreate = DateTime.Now,
                 DateToEnd = DateTime.Parse("17/02/2015"),
-                Preority = PreorityType.Important,
+                Priority = PriorityType.Important,
                 Description = "Prepare your CV!",
                 SubTasks = subTask
             };
@@ -135,7 +135,7 @@ namespace Tasks.Data.Migrations
                     Title = "Must go to work",
                     DateOnCreate = DateTime.Now,
                     DateToEnd = DateTime.Parse("03/02/2015"),
-                    Preority = PreorityType.Important,
+                    Priority = PriorityType.Important,
                     Description = "Get ready to work!",
                     SubTasks = new List<SubTask>
                     {
@@ -160,7 +160,7 @@ namespace Tasks.Data.Migrations
                     Title = "Buy food!",
                     DateOnCreate = DateTime.Now,
                     DateToEnd = DateTime.Parse("20/02/2015"),
-                    Preority = PreorityType.Important,
+                    Priority = PriorityType.Important,
                     Description = "Buy food to cook!",
                     SubTasks = new List<SubTask>
                     {

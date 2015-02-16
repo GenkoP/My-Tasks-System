@@ -9,6 +9,7 @@
     using Tasks.Data.Repositories;
     using Tasks.WebClient.Providers;
     using Tasks.WebClient.Models.ViewModels;
+    using System.Data.Entity;
 
     public class HomeController : BaseController
     {
@@ -23,11 +24,17 @@
         {
             string currentUserId = this.CurrentUser.GetUserId();
 
-            var allTasks = this.Data.Tasks.All()
-                .Where(x => x.UserID == currentUserId && x.DateToEnd >= DateTime.Now)
-                .Select(MyTaskViewModel.GetTasks);
+            var currnetDate = DateTime.Now.Date;
 
-           return View(allTasks);
+            var allTasksForToday = this.Data.Tasks
+                        .SearchFor(x => x.UserID == currentUserId
+                                   && DbFunctions.TruncateTime(x.DateToEnd) == DbFunctions.TruncateTime(currnetDate)
+                                   && x.IsCompleted == false
+                                   )
+                        .OrderByDescending(x => x.Priority)
+                        .Select(MyTaskViewModel.GetTasks);
+
+            return View(allTasksForToday);
         }
 
         public ActionResult About()

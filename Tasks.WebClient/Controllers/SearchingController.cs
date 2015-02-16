@@ -28,35 +28,11 @@
                                                 && x.UserID == currentUserId 
                                                 && x.IsCompleted == false
                                               )
+                                    .OrderByDescending(x => x.Priority)
                                     .Select(MyTaskViewModel.GetTasks);
 
 
             return this.PartialView("_ListOfMyTaskPartial", currentTasks);
-        }
-
-       
-        public ActionResult SearchByPriority()
-        {
-            var currentTasks = new List<MyTaskViewModel> 
-            {
-           
-                new MyTaskViewModel
-                {
-                     DateToEnd = DateTime.Now,
-                     Title = "baba mesa",
-                     Preority = Tasks.Models.PreorityType.Important
-                },
-
-                new MyTaskViewModel
-                {
-                     DateToEnd = DateTime.Now,
-                     Title = "kuma lisa",
-                     Preority = Tasks.Models.PreorityType.Important
-                },
-
-            };
-
-            return this.PartialView("_ListOfMyTaskPartial", currentTasks.AsQueryable());
         }
     }
 }

@@ -1,22 +1,19 @@
-﻿@using Tasks.WebClient.Models.ViewModels
-@model IQueryable<MyTaskViewModel>
+﻿@model IQueryable<DateTime>
 @{
     ViewBag.Title = "Index";
 
-    var tasksByDate = Model.GroupBy(x => x.DateToEnd).Where(g => g.Count() >= 1 ).Select(g => g.Key);
-    var tasksToDay = Model.Where(x => x.DateToEnd == DateTime.Now);
+    var date = Model;
 }
 
 <div>
     @Html.ActionLink("Add new task", "Create", "Tasks", new { @class = "btn btn-lg btn-primary" })
 </div>
 
-<h2>All my task by date</h2>
+<h2>All my tasks by date</h2>
 <div class="row">
-   @Html.Partial("_SearchingByDateTimePartial", tasksByDate)
+  
+    @Html.Partial("_SearchingByDateTimePartial", Model))
 </div>
-
-<h2> My tasks today </h2>
 
 <div>
     @using (Ajax.BeginForm("SearchByPriority", "Searching", new AjaxOptions
@@ -34,18 +31,6 @@
 
 <div class="row" id="results">
 
-    @if (tasksToDay.ToList().Count > 0)
-    {
-        @Html.Partial("_ListOfMyTaskPartial", tasksToDay)
-    }
-    else
-    {
-        <h4>You no have tasks today</h4>
-    <div>
-        
-        @Html.ActionLink("Add new task", "Create", "Tasks", new { @class = "btn btn-lg btn-primary" })
-    </div>
-    }
-   
+    
 
 </div>

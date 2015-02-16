@@ -21,7 +21,7 @@
                     Title = task.Title,
                     Description = task.Description,
                     DateToEnd = task.DateToEnd,
-                    Preority = task.Preority,
+                    Priority = task.Priority,
                 };
 
             }
@@ -38,7 +38,7 @@
 
         public DateTime DateToEnd { get; set; }
 
-        public PreorityType Preority { get; set; }
+        public PriorityType Priority { get; set; }
 
        
 

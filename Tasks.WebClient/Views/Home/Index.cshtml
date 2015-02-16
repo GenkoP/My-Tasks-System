@@ -10,10 +10,9 @@
 @if (Request.IsAuthenticated)
 {
 
-    <h1>Current Tasks</h1>
+    <h1>Your tasks today!</h1>
 
     <div class="row">
-        
             @Html.Partial("_ListOfMyTaskPartial", Model)
     </div>
 

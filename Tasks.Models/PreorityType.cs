@@ -1,6 +1,6 @@
 ﻿namespace Tasks.Models
 {
-    public enum PreorityType
+    public enum PriorityType
     {
         Low = 0,
         Medium = 1,
