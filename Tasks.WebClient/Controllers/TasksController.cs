@@ -38,17 +38,6 @@
             return View(currentTasks);
         }
 
-        public ActionResult Search(DateTime date)
-        {
-             var currentUserId = this.CurrentUser.GetUserId();
-
-             var currentTasks = this.Data.Tasks.All()
-                 .Where(x => x.DateToEnd == date && x.UserID == currentUserId && x.IsCompleted == false)
-                 .Select(MyTaskViewModel.GetTasks);
-
-             return this.PartialView("_ListOfMyTaskPartial", currentTasks);
-        }
-        
         [HttpGet]
         public ActionResult Create()
         {
