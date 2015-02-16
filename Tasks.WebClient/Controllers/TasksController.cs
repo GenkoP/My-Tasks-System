@@ -28,11 +28,14 @@
         {
             var currentUserId = this.CurrentUser.GetUserId();
 
-            var currentTasks = this.Data.Tasks.All()
-                .Where(x => x.DateToEnd > DateTime.Now && x.UserID == currentUserId && x.IsCompleted == false)
-                .OrderByDescending(x => x.Preority == PreorityType.Important)
-                .OrderBy(x=> x.DateToEnd)
-                .Select(MyTaskViewModel.GetTasks);
+            var currentTasks = this.Data.Tasks
+                .SearchFor(x => x.DateToEnd > DateTime.Now 
+                                    && x.UserID == currentUserId 
+                                    && x.IsCompleted == false
+                               )
+                    .OrderByDescending(x => x.Preority == PreorityType.Important)
+                    .OrderBy(x=> x.DateToEnd)
+                    .Select(MyTaskViewModel.GetTasks);
 
 
             return View(currentTasks);

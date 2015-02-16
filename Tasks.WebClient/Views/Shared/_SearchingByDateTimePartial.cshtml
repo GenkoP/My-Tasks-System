@@ -1,0 +1,15 @@
+﻿@model IQueryable<DateTime>
+
+@foreach (var date in Model)
+{
+
+    <div class="col-md-1">
+
+        @Ajax.ActionLink(date.ToString("dd/MM/yyyy"), "SearchByDate", "Searching", new { date = date },
+            new AjaxOptions
+            {
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "results",
+            }, new { @class = "btn btn-danger" })
+    </div>
+}

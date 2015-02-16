@@ -23,12 +23,12 @@
         {
             var currentUserId = this.CurrentUser.GetUserId();
 
-           // var date = DateTime.Parse("03/03/2015");
-
-            var currentTasks = this.Data.Tasks.All()
-                .Where(x => x.DateToEnd == date && x.UserID == currentUserId && x.IsCompleted == false)
-                .Select(MyTaskViewModel.GetTasks);
-
+            var currentTasks = this.Data.Tasks
+                                    .SearchFor(x => x.DateToEnd == date 
+                                                && x.UserID == currentUserId 
+                                                && x.IsCompleted == false
+                                              )
+                                    .Select(MyTaskViewModel.GetTasks);
 
 
             return this.PartialView("_ListOfMyTaskPartial", currentTasks);
