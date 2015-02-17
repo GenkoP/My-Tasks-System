@@ -12,18 +12,86 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
+
+body{
+    margin-top:30px;
+}
+
 .dl-horizontal dt {
     white-space: normal;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+input {
+    max-width: 300px;
+}
+
+.jumbotron.starting-page{
+    padding:20px;
 }
 
 .tasks-collapse{
-    margin-top: 20px;
+    margin-top: 30px;
     margin-bottom: 20px;
+}
+
+.date-by-searching{
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+.btn-add-task{
+    margin-top:15px;
+    margin-bottom:0;
+}
+
+.start-btns-home{
+    margin-top:30px;
+    margin-left:20px;
+}
+
+#Title{
+    width:320px;
+    height:30px;
+    border-radius:5px;
+}
+#Description{
+    width:300px;
+    height:200px;
+}
+
+#Priority{
+     width:120px;
+}
+
+#DateToEnd{
+    text-align: center;
+    height:35px;
+    font-size: 17px;
+    width:120px;
+    border-radius:5px;
+}
+
+.error-messages{
+    font-size:17px;
+    color:#981f1f;
+}
+
+.creating-task{
+    margin-left:10%;
+}
+
+.creating-task .control-label{
+    margin-bottom:8px;
+}
+
+.reg-btn{
+    margin-left:15px;
+}
+
+.bs-component .form-inputs{
+    margin-left:10%;
+}
+#add-tasks-btn{
+    margin-top:20px;
 }

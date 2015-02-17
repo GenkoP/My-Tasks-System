@@ -12,7 +12,6 @@
 
     using Tasks.WebClient.App_Start;
 
-
     public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
@@ -25,5 +24,6 @@
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+ 
     }
 }

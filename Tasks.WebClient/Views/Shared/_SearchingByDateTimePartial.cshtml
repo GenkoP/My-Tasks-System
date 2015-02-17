@@ -1,15 +1,45 @@
 ﻿@model IQueryable<DateTime>
 
-@foreach (var date in Model)
+@if (Model.Count() == 0)
 {
-    
-    <div class="col-md-1">
+    <div>
+        @Html.ActionLink("Add task", "Create", "Tasks", null, new { @class = "btn btn-lg btn-primary btn-add-task" })
+        <h2>You have no any tasks! </h2>
+        <hr />
+    </div>
+}
+else
+{
 
-        @Ajax.ActionLink(date.ToString("dd/MM/yyyy"), "SearchByDate", "Searching", new { date = date },
+    <div>
+        @Html.ActionLink("Add task", "Create", "Tasks", null, new { @class = "btn btn-lg btn-primary btn-add-task" })
+        <h2>All my tasks by date</h2>
+        <hr />
+    </div>
+
+    foreach (var date in Model)
+    {
+        string formatDate;
+
+        if (date.Day == DateTime.Now.Day && date.Month == DateTime.Now.Month && date.Year == DateTime.Now.Year)
+        {
+            formatDate = "Today";
+        }
+        else
+        {
+            formatDate = date.ToString("dd/MM/yyyy");
+        }
+
+        <div class="col-sm-1 date-by-searching ">
+
+            @Ajax.ActionLink(formatDate, "SearchByDate", "Searching", new { date = date },
             new AjaxOptions
             {
                 InsertionMode = InsertionMode.Replace,
                 UpdateTargetId = "results",
             }, new { @class = "btn btn-danger" })
-    </div>
+        </div>
+
+    }
+
 }

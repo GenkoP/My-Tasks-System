@@ -4,21 +4,29 @@
 
 @if (Model.Count() == 0)
 {
-    <h4>You no have tasks today</h4>
-    <div>
-        @Html.ActionLink("Add new task", "Create", "Tasks",null, new { @class = "btn btn-lg btn-primary" })
+    <div class="starting-page">
+        <div class="not-have-tasks">
+            <h2>You have no tasks today!</h2>
+        </div>
+        <div class="row start-btns-home">
+            <p class="col-md-2">
+                @Html.ActionLink("Add new task", "Create", "Tasks", null, new { @class = "btn btn-primary" })
+            </p>
+            <p class="col-md-1">
+                @Html.ActionLink("Go to tasks", "Index", "Tasks", null, new { @class = "btn btn-primary" })
+            </p>
+        </div>
+
+       
     </div>
+
 }
 else
 {
-
+    <h1>Your tasks today!</h1>
 
     foreach (var task in Model)
     {
-
         @Html.Partial("_MyTaskPartial", task)
-      
-
-
     }
 }

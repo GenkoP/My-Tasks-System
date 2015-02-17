@@ -1,36 +1,16 @@
 ﻿@model IQueryable<DateTime>
 @{
     ViewBag.Title = "Index";
-
-    var date = Model;
 }
 
 <div>
-    @Html.ActionLink("Add new task", "Create", "Tasks", new { @class = "btn btn-lg btn-primary" })
+    <h5>
+        @DateTime.Now
+    </h5>
 </div>
 
-<h2>All my tasks by date</h2>
 <div class="row">
-  
-    @Html.Partial("_SearchingByDateTimePartial", Model))
+    @Html.Partial("_SearchingByDateTimePartial", Model)
 </div>
 
-<div>
-    @using (Ajax.BeginForm("SearchByPriority", "Searching", new AjaxOptions
-    {
-        HttpMethod = "POST",
-        UpdateTargetId = "results",
-        InsertionMode = InsertionMode.Replace
-    }))
-    {
-        <input type="submit" name="name" value="Search" />
-    }
-
-</div>
-
-
-<div class="row" id="results">
-
-    
-
-</div>
+<div class="row" id="results"></div>
