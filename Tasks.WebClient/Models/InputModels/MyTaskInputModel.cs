@@ -5,22 +5,29 @@
     using System.ComponentModel.DataAnnotations;
 
     using Tasks.Models;
+    using Tasks.WebClient.Helpers;
 
 
     public class MyTaskInputModel
     {
+
         [Required]
+        [DisplayName("Task title:")]
         [StringLength(30, MinimumLength = 2)]
         public string Title { get; set; }
 
+        [DisplayName("Description:")]
         [StringLength(600)]
         public string Description { get; set; }
 
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "dd/MM/yyyy")]
+        [Required]
+        [DisplayName("Date to end:")]
+        [MinAndMaxDateTime()]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateToEnd { get; set; }
 
-       public PriorityType Priority { get; set; }
+        [DisplayName("Task priority:")]
+        public PriorityType Priority { get; set; }
 
     }
 }
