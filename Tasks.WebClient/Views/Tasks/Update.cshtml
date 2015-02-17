@@ -4,45 +4,65 @@
     ViewBag.Title = "Update";
 }
 
-<h2>Update</h2>
+<div class="well bs-component">
 
-@using (Html.BeginForm("Update", "Tasks", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
+    @using (Html.BeginForm("Update", "Tasks", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <fieldset>
+            <legend>Update Task</legend>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "error-messages" })
 
-    <div class="form-group">
-        @Html.LabelFor(x => x.Title, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.EditorFor(x => x.Title, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.Preority, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(x => x.Preority, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.Description, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.DateToEnd, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.EditorFor(x => x.DateToEnd, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-10">
-            <input type="submit" value="Update" class="btn btn-primary" />
-        </div>
-    </div>
-}
+            <div class="form-inputs">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Title, new { @class = "control-label" })
+                    <div>
+                        @Html.EditorFor(x => x.Title, new { @class = "form-control" })
+                        <div class="error-messages">
+                            @Html.ValidationMessageFor(x => x.Title)
+                        </div>
+                    </div>
+                </div>
+                <div class="date-and-select">
+                    <div class="row">
+                        <div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.Priority, new { @class = "control-label" })
+                                    <div>
+                                        @Html.EnumDropDownListFor(x => x.Priority, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.DateToEnd, new { @class = "control-label" })
+                                <div>
+                                    @Html.EditorFor(x => x.DateToEnd, new { @class = "form-control" })
+                                    <div class="error-messages">
+                                        @Html.ValidationMessageFor(x => x.DateToEnd)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Description, new { @class = "control-label" })
+                    <div>
+                        @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+                        <input type="submit" id="add-tasks-btn" value="Update" class="btn btn-block btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    }
 
+</div>
 
 @section Scripts {
+
+    @Scripts.Render("~/bundles/date-val")
     @Scripts.Render("~/bundles/jqueryval")
 }
