@@ -16,7 +16,6 @@
                 {
                     Title = subTask.Title,
                     Description = subTask.Description,
-                    DateToEnd = subTask.DateToEnd,
                     Type = subTask.Type,
 
                 };
@@ -27,8 +26,6 @@
         public string Title { get; set; }
 
         public string Description { get; set; }
-
-        public DateTime? DateToEnd { get; set; }
 
         public PriorityType Type { get; set; }
 

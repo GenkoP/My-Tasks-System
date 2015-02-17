@@ -1,6 +1,7 @@
 ﻿namespace Tasks.Models
 {
     using System;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public class SubTask
@@ -16,11 +17,11 @@
         [StringLength(600)]
         public string Description { get; set; }
 
-        public DateTime? DateOnCreate { get; set; }
-
-        public DateTime? DateToEnd { get; set; }
-
+        [DefaultValue(1)]
         public PriorityType Type { get; set; }
+
+        [DefaultValue(false)]
+        public bool IsCompleted { get; set; }
 
         [Required]
         public int MyTaskID { get; set; }
