@@ -1,9 +1,10 @@
-﻿namespace Tasks.WebClient.Models.ViewModels.MyTasks
+﻿namespace Tasks.WebClient.Models.ViewModels
 {
     using System;
     using System.Linq.Expressions;
 
     using Tasks.Models;
+
 
     public class SubTasksViewModel
     {
@@ -15,8 +16,7 @@
                 return subTask => new SubTasksViewModel
                 {
                     Title = subTask.Title,
-                    Description = subTask.Description,
-                    Type = subTask.Type,
+                    Priority = subTask.Priority,
 
                 };
             }
@@ -25,9 +25,8 @@
      
         public string Title { get; set; }
 
-        public string Description { get; set; }
 
-        public PriorityType Type { get; set; }
+        public PriorityType Priority { get; set; }
 
     }
 }

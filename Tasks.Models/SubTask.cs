@@ -14,11 +14,8 @@
         [StringLength(30 , MinimumLength= 2)]
         public string Title { get; set; }
 
-        [StringLength(600)]
-        public string Description { get; set; }
-
         [DefaultValue(1)]
-        public PriorityType Type { get; set; }
+        public PriorityType Priority { get; set; }
 
         [DefaultValue(false)]
         public bool IsCompleted { get; set; }

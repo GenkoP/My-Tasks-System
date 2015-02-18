@@ -27,11 +27,13 @@
 
         public DateTime DateOnCreate { get; set; }
 
+        [Required]
         public DateTime DateToEnd { get; set; }
 
         [DefaultValue(false)]
         public bool IsCompleted { get; set;}
 
+        [Required]
         [DefaultValue(2)]
         public PriorityType Priority { get; set; }
 

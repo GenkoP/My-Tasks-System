@@ -1,34 +1,27 @@
 ﻿namespace Tasks.WebClient.Models.InputModels
 {
+
     using System;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-
+    using System.Web;
     using Tasks.Models;
-    using Tasks.WebClient.Helpers;
 
-
-    public class MyTaskInputModel
+    public class SubTaskInputModel
     {
 
         [Required]
-        [DisplayName("Task title:")]
-        [StringLength(30, MinimumLength = 2)]
+        [StringLength(30 , MinimumLength = 2)]
+        [DisplayName("Title:")]
         public string Title { get; set; }
-
+        
         [DisplayName("Description:")]
         [StringLength(600)]
         public string Description { get; set; }
-
-        [Required]
-        [DisplayName("Date to end:")]
-        [MinAndMaxDateTime()]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime DateToEnd { get; set; }
-
-        [Required]
+        
         [DisplayName("Task priority:")]
         public PriorityType Priority { get; set; }
+
 
     }
 }
