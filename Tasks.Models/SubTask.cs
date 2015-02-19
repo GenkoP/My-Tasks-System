@@ -15,7 +15,7 @@
         public string Title { get; set; }
 
         [Required]
-        [DefaultValue(1)]
+        [DefaultValue(PriorityType.Medium)]
         public PriorityType Priority { get; set; }
 
         [DefaultValue(false)]

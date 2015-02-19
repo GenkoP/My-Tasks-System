@@ -34,7 +34,7 @@
         public bool IsCompleted { get; set;}
 
         [Required]
-        [DefaultValue(2)]
+        [DefaultValue(PriorityType.Medium)]
         public PriorityType Priority { get; set; }
 
         [Required]

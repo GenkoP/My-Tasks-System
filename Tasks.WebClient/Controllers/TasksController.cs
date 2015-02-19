@@ -14,14 +14,14 @@
     using Tasks.WebClient.Models.InputModels;
     using Tasks.WebClient.Models.ViewModels;
 
-    
+
     public class TasksController : BaseController
     {
-        
+
         public TasksController(ITaskManagerData data, ICurrentUserIdProvider userId)
             : base(data, userId)
         {
-            
+
         }
 
         [HttpGet]
@@ -29,11 +29,11 @@
         {
             var currentUserId = this.CurrentUser.GetUserId();
 
-            var currnetDate = DateTime.Now.Date;
+            var currentDate = DateTime.Now.Date;
 
             var currentTasks = this.Data.Tasks
-                .SearchFor(x => DbFunctions.TruncateTime(x.DateToEnd) >= DbFunctions.TruncateTime(currnetDate)
-                                    && x.UserID == currentUserId 
+                .SearchFor(x => DbFunctions.TruncateTime(x.DateToEnd) >= DbFunctions.TruncateTime(currentDate)
+                                    && x.UserID == currentUserId
                                     && x.IsCompleted == false
                                )
                     .GroupBy(x => x.DateToEnd)
@@ -52,11 +52,12 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MyTaskInputModel task  , ICollection<SubTaskInputModel> subtasks)
+        public ActionResult Create(MyTaskInputModel task, ICollection<SubTaskInputModel> subtasks)
         {
 
             if (!ModelState.IsValid)
             {
+
                 return View("Error");
             }
 
@@ -76,18 +77,11 @@
             this.Data.Tasks.Add(newTask);
             this.Data.SaveChanges();
 
-            if (subtasks.Count > 0)
-            {
-                this.CreateSubtasks(subtasks, newTask.ID);
-            }
-            
+            this.CreateSubtasks(subtasks, newTask.ID);
+
 
             return RedirectToAction("Index");
         }
-
-        
-
-
 
         public ActionResult Delete(int id)
         {
@@ -111,7 +105,7 @@
         }
 
         [HttpGet]
-        public  ActionResult Update(int id)
+        public ActionResult Update(int id)
         {
             var currnetUserId = this.CurrentUser.GetUserId();
 
@@ -129,7 +123,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(MyTaskViewModel task , ICollection<SubTaskInputModel> inpSubtasks)
+        public ActionResult Update(MyTaskViewModel task, ICollection<SubTaskInputModel> inpSubtasks)
         {
             if (!ModelState.IsValid)
             {
@@ -154,6 +148,7 @@
 
             this.Data.Tasks.Update(updatedTask);
             this.Data.SaveChanges();
+
 
             this.CreateSubtasks(inpSubtasks, updatedTask.ID);
 
@@ -184,32 +179,36 @@
 
         private void CreateSubtasks(ICollection<SubTaskInputModel> inpSubtasks, int taskID)
         {
-            if (inpSubtasks.Count > 30)
-            {
-                throw new HttpException("To many requests!");
-            }
-
-            var listSubtasks = new List<SubTask>();
-
-            foreach (var inpSubtask in inpSubtasks)
+            if (inpSubtasks != null)
             {
 
-                listSubtasks.Add(new SubTask
+                if (inpSubtasks.Count > 10)
                 {
-                    Title = inpSubtask.SubtaskTitle,
-                    Priority = inpSubtask.SubtaskPriority,
-                    MyTaskID = taskID
-                });
-            }
+                    throw new HttpException("To many requests!");
+                }
 
-            foreach (var subtask in listSubtasks)
-            {
-                this.Data.SubTasks.Add(subtask);
-            }
+                var listSubtasks = new List<SubTask>();
 
-            this.Data.SaveChanges();
+                foreach (var inpSubtask in inpSubtasks)
+                {
+
+                    listSubtasks.Add(new SubTask
+                    {
+                        Title = inpSubtask.SubtaskTitle,
+                        Priority = inpSubtask.SubtaskPriority,
+                        MyTaskID = taskID
+                    });
+                }
+
+                foreach (var subtask in listSubtasks)
+                {
+                    this.Data.SubTasks.Add(subtask);
+                }
+
+                this.Data.SaveChanges();
+
+            }
         }
-
 
     }
 }

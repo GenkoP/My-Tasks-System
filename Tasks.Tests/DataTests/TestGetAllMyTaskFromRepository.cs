@@ -28,6 +28,8 @@
                 {
                     Title = this.Generator.RandomMixedString(5 , 20),
                     DateOnCreate = DateTime.Now,
+                     DateToEnd = DateTime.Now,
+                     Priority = PriorityType.Low,
                     UserID = user.Id,
                     
                 });

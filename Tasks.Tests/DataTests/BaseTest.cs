@@ -63,6 +63,8 @@
             {
                 Title = title,
                 DateOnCreate = DateTime.Now,
+                DateToEnd = DateTime.Now,
+                Priority = PriorityType.Low,
                 UserID = user.Id,
             };
 
@@ -93,25 +95,6 @@
 
             return user;
         }
-
-        protected ICollection<User> GenerateUsers(int count)
-        {
-            string email = this.generator.GenerateEmail();
-
-            var listOfUsers = new List<User>();
-
-            for (int i = 0; i < count; i++)
-            {
-                listOfUsers.Add(new User
-                {
-                    Email = email,
-                    UserName = email,
-                });
-            }
-
-            return listOfUsers;
-        }
-
 
     }
 }
