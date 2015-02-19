@@ -13,7 +13,7 @@
     public class DataContext : IdentityDbContext<User> , IDataContext
     {
         public DataContext()
-            : base("dbfd2a54ae33f44b6785f4a444001b3ccd", throwIfV1Schema: false)
+            : base("TaskManagerDb", throwIfV1Schema: false)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<DataContext, Configuration>());
         }
