@@ -16,7 +16,7 @@
         default:
             break;
     }
-    
+
 }
 
 <div class="col-md-4 tasks-collapse">
@@ -34,12 +34,12 @@
                 <p>Description: @Model.Description</p>
             </div>
 
+            <div class="text-nowrap">
+                @Html.Partial("_SubTaskPartial" , Model.Subtasks)
+            </div>
+
             <div class="row">
-                <div class="col-md-4">
-                    <a href="@Url.Action("Update", "Tasks", new { Model.ID })" class="btn btn-primary ">
-                        <span>Update</span>
-                    </a>
-                </div>
+                
                 <div class="col-md-4">
                     <a href="@Url.Action("CheckTaskIsComplete", "Tasks", new { Model.ID })" class="btn btn-default ">
                         <span>End task</span>
@@ -50,8 +50,21 @@
                         <span>Delete</span>
                     </a>
                 </div>
+                <div class="col-md-4">
+                    <a href="@Url.Action("Update", "Tasks", new { Model.ID })" class="btn btn-primary ">
+                        <span>Update</span>
+                    </a>
+                </div>
             </div>
 
         </div>
     </div>
 </div>
+
+
+
+@section Scripts{
+
+
+    @Scripts.Render("~/bundles/jquerval");
+}

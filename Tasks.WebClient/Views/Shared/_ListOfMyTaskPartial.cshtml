@@ -15,16 +15,12 @@
             <p class="col-md-1">
                 @Html.ActionLink("Go to tasks", "Index", "Tasks", null, new { @class = "btn btn-primary" })
             </p>
-        </div>
-
-       
+        </div>  
     </div>
 
 }
 else
 {
-    <h1>Your tasks today!</h1>
-
     foreach (var task in Model)
     {
         @Html.Partial("_MyTaskPartial", task)

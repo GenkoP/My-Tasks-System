@@ -5,11 +5,12 @@
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
+
     using Tasks.Data.Repositories;
     using Tasks.WebClient.Models.ViewModels;
     using Tasks.WebClient.Providers;
 
-    [Authorize]
+  
     public class SearchingController : BaseController
     {
 

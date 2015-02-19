@@ -6,6 +6,7 @@
     using Tasks.Data;
     using Tasks.WebClient.Providers;
 
+    [Authorize]
     public abstract class BaseController : Controller
     {
 

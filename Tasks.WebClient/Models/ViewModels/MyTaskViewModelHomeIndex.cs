@@ -22,6 +22,7 @@
                     Description = task.Description,
                     DateToEnd = task.DateToEnd,
                     Priority = task.Priority,
+                    Subtasks = task.SubTasks.AsQueryable().Select(SubTasksViewModel.GetSubtasts),
                 };
 
             }
@@ -29,18 +30,15 @@
 
         public int ID { get; set; }
 
-        [Required]
-        [StringLength(30, MinimumLength = 2)]
         public string Title { get; set; }
 
-        [StringLength(600)]
         public string Description { get; set; }
 
         public DateTime DateToEnd { get; set; }
 
         public PriorityType Priority { get; set; }
 
-       
+        public IQueryable<SubTasksViewModel> Subtasks { get; set; } 
 
     }
 }

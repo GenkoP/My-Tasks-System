@@ -14,6 +14,7 @@
         [StringLength(30 , MinimumLength= 2)]
         public string Title { get; set; }
 
+        [Required]
         [DefaultValue(1)]
         public PriorityType Priority { get; set; }
 

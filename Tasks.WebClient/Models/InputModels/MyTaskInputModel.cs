@@ -1,6 +1,7 @@
 ﻿namespace Tasks.WebClient.Models.InputModels
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
@@ -29,6 +30,8 @@
         [Required]
         [DisplayName("Task priority:")]
         public PriorityType Priority { get; set; }
+
+
 
     }
 }

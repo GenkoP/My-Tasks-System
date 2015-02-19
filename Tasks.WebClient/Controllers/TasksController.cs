@@ -4,18 +4,17 @@
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
+    using System.Collections.Generic;
+    using System.Data.Entity.Core.Objects;
+    using System.Data.Entity;
 
     using Tasks.Models;
     using Tasks.Data.Repositories;
     using Tasks.WebClient.Providers;
     using Tasks.WebClient.Models.InputModels;
     using Tasks.WebClient.Models.ViewModels;
-    using System.Data.Entity.Core.Objects;
-    using System.Data.Entity;
-   
 
-
-    [Authorize]
+    
     public class TasksController : BaseController
     {
         
@@ -53,9 +52,8 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MyTaskInputModel task)
+        public ActionResult Create(MyTaskInputModel task  , ICollection<SubTaskInputModel> subtasks)
         {
-
 
             if (!ModelState.IsValid)
             {
@@ -78,11 +76,19 @@
             this.Data.Tasks.Add(newTask);
             this.Data.SaveChanges();
 
+            if (subtasks.Count > 0)
+            {
+                this.CreateSubtasks(subtasks, newTask.ID);
+            }
+            
 
             return RedirectToAction("Index");
         }
+
         
-      
+
+
+
         public ActionResult Delete(int id)
         {
 
@@ -123,7 +129,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(MyTaskViewModel task)
+        public ActionResult Update(MyTaskViewModel task , ICollection<SubTaskInputModel> inpSubtasks)
         {
             if (!ModelState.IsValid)
             {
@@ -149,6 +155,9 @@
             this.Data.Tasks.Update(updatedTask);
             this.Data.SaveChanges();
 
+            this.CreateSubtasks(inpSubtasks, updatedTask.ID);
+
+
             return RedirectToAction("Index");
         }
 
@@ -172,5 +181,35 @@
 
             return RedirectToAction("Index");
         }
+
+        private void CreateSubtasks(ICollection<SubTaskInputModel> inpSubtasks, int taskID)
+        {
+            if (inpSubtasks.Count > 30)
+            {
+                throw new HttpException("To many requests!");
+            }
+
+            var listSubtasks = new List<SubTask>();
+
+            foreach (var inpSubtask in inpSubtasks)
+            {
+
+                listSubtasks.Add(new SubTask
+                {
+                    Title = inpSubtask.SubtaskTitle,
+                    Priority = inpSubtask.SubtaskPriority,
+                    MyTaskID = taskID
+                });
+            }
+
+            foreach (var subtask in listSubtasks)
+            {
+                this.Data.SubTasks.Add(subtask);
+            }
+
+            this.Data.SaveChanges();
+        }
+
+
     }
 }

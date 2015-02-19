@@ -1,0 +1,22 @@
+﻿@model IQueryable<Tasks.WebClient.Models.ViewModels.SubTasksViewModel>
+
+<div class="list-group">
+    <a href="#" class="list-group-item active">
+        Subtasks
+    </a>
+
+    @foreach (var subtask in Model)
+    {
+        <a href="#" class="list-group-item">
+            <div class="row">
+                <div class="col-md-8">
+                    <span>@subtask.Title</span>
+                </div>
+                <div class="col-md-4">
+                    <span>@subtask.Priority</span>
+                </div>
+            </div>
+        </a>
+    }
+
+</div>
