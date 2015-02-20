@@ -57,8 +57,7 @@
 
             if (!ModelState.IsValid)
             {
-
-                return View("Error");
+               return View("Error", ViewData.ModelState.Values);
             }
 
             var currentUserId = this.CurrentUser.GetUserId();

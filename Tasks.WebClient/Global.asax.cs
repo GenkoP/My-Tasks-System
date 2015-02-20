@@ -18,6 +18,8 @@
         {
             ViewEnginesConfiguration.RegisterViewEngines(ViewEngines.Engines);
 
+            ControllerBuilder.Current.SetControllerFactory(new DefaultControllerFactory(new CultureAwareControllerActivator()));
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
