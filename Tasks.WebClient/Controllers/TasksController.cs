@@ -57,7 +57,11 @@
 
             if (!ModelState.IsValid)
             {
-               return View("Error", ViewData.ModelState.Values);
+                
+                var errors = ModelState.Values.SelectMany(x => x.Errors).ToArray();
+
+
+                return View("Error", errors);
             }
 
             var currentUserId = this.CurrentUser.GetUserId();
@@ -127,8 +131,12 @@
             if (!ModelState.IsValid)
             {
 
-                return View("Error");
+                var errors = ModelState.Values.SelectMany(x => x.Errors).ToArray();
+
+
+                return View("Error", errors);
             }
+
 
             var currnetUserId = this.CurrentUser.GetUserId();
 
