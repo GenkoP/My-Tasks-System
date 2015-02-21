@@ -5,6 +5,7 @@
     using Tasks.Data.Repositories;
     using Tasks.Data;
     using Tasks.WebClient.Providers;
+using Tasks.Models;
 
     [Authorize]
     public abstract class BaseController : Controller

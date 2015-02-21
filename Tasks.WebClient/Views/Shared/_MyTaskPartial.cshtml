@@ -41,14 +41,27 @@
             <div class="row">
                 
                 <div class="col-md-4">
-                    <a href="@Url.Action("CheckTaskIsComplete", "Tasks", new { Model.ID })" class="btn btn-default ">
-                        <span>End task</span>
-                    </a>
+                    @using (Html.BeginForm("CheckTaskIsComplete", "Tasks", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.Hidden("id", Model.ID)
+
+                        <input class="btn btn-default" type="submit" value="End Task" />
+                    }
+                        
+                    
                 </div>
                 <div class="col-md-4">
-                    <a href="@Url.Action("Delete", "Tasks", new { Model.ID })" class="btn btn-danger ">
-                        <span>Delete</span>
-                    </a>
+                   @using(Html.BeginForm("Delete" , "Tasks", FormMethod.Post))
+                   {
+                       @Html.AntiForgeryToken()
+                       
+                       @Html.Hidden("id",Model.ID)
+
+                        <input class="btn btn-danger" type="submit"  value="Delete" />
+
+                   }
                 </div>
                 <div class="col-md-4">
                     <a href="@Url.Action("Update", "Tasks", new { Model.ID })" class="btn btn-primary ">

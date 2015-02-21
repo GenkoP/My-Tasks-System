@@ -13,6 +13,7 @@
     using Tasks.WebClient.Providers;
     using Tasks.WebClient.Models.InputModels;
     using Tasks.WebClient.Models.ViewModels;
+    using System.Net;
 
 
     public class TasksController : BaseController
@@ -86,8 +87,15 @@
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+       [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
+
+            if (id == null)
+	        {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+	        }
 
             var currnetUserId = this.CurrentUser.GetUserId();
 
@@ -95,7 +103,7 @@
 
             if (task == null)
             {
-                return View("Error");
+                return HttpNotFound();
             }
             else
             {
@@ -143,9 +151,9 @@
             var updatedTask = this.Data.Tasks.SearchFor(x => x.UserID == currnetUserId && x.ID == task.ID)
                 .FirstOrDefault();
 
-            if (updatedTask == null)
+            if (task == null)
             {
-                return View("Error");
+                return HttpNotFound();
             }
 
             updatedTask.Title = task.Title;
@@ -163,6 +171,8 @@
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CheckTaskIsComplete(int id)
         {
             var currnetUserId = this.CurrentUser.GetUserId();
@@ -173,7 +183,7 @@
 
             if (task == null)
             {
-                return View("Error");
+                return HttpNotFound();
             }
             else
             {
