@@ -10,7 +10,7 @@
 
     public class MyTaskViewModel
     {
-        
+
         public static Expression<Func<MyTask, MyTaskViewModel>> GetTasks
         {
             get
@@ -22,6 +22,7 @@
                     Description = task.Description,
                     DateToEnd = task.DateToEnd,
                     Priority = task.Priority,
+                    IsCompleated = task.IsCompleted,
                     Subtasks = task.SubTasks.AsQueryable().Select(SubTasksViewModel.GetSubtasts),
                 };
 
@@ -34,11 +35,13 @@
 
         public string Description { get; set; }
 
+        public bool IsCompleated { get; set; }
+
         public DateTime DateToEnd { get; set; }
 
         public PriorityType Priority { get; set; }
 
-        public IQueryable<SubTasksViewModel> Subtasks { get; set; } 
+        public IQueryable<SubTasksViewModel> Subtasks { get; set; }
 
     }
 }

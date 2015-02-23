@@ -1,0 +1,45 @@
+﻿@model Tasks.WebClient.Models.ViewModels.MyTaskViewModel
+
+@{
+     var controllerName = "Tasks";
+}
+
+<div class="row">
+    @if (Model.IsCompleated == false && Model.DateToEnd >= DateTime.Now.Date)
+    {
+
+        <div class="col-md-4">
+            @using (Html.BeginForm("CheckTaskIsComplete", "Tasks", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.Hidden("id", Model.ID)
+
+                <input class="btn btn-default" type="submit" value="End Task" />
+            }
+        </div>
+    }
+    else
+    {
+        controllerName = "History";
+    }
+   
+    <div class="col-md-4">
+        <a href="@Url.Action("Update", "Tasks", new { Model.ID })" class="btn btn-primary ">
+            <span>Update</span>
+        </a>
+    </div>
+
+    <div class="col-md-4 pull-right ">
+
+        @using (Html.BeginForm("Delete", controllerName, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.Hidden("id", Model.ID)
+
+            <input class="btn btn-danger" type="submit" value="Delete" />
+        }
+    </div>
+
+</div>

@@ -31,44 +31,22 @@
                 <p>Priority: @Model.Priority</p>
             </div>
             <div>
-                <p>Description: @Model.Description</p>
+                @if (Model.Description != null)
+                {
+                    <p>Description: @Model.Description</p>
+                }
+               
             </div>
 
             <div class="text-nowrap">
-                @Html.Partial("_SubTaskPartial" , Model.Subtasks)
+                @if (Model.Subtasks.ToList().Count > 0)
+                {
+                    @Html.Partial("_SubTaskPartial", Model.Subtasks)
+                }
+               
             </div>
 
-            <div class="row">
-                
-                <div class="col-md-4">
-                    @using (Html.BeginForm("CheckTaskIsComplete", "Tasks", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
-
-                        @Html.Hidden("id", Model.ID)
-
-                        <input class="btn btn-default" type="submit" value="End Task" />
-                    }
-                        
-                    
-                </div>
-                <div class="col-md-4">
-                   @using(Html.BeginForm("Delete" , "Tasks", FormMethod.Post))
-                   {
-                       @Html.AntiForgeryToken()
-                       
-                       @Html.Hidden("id",Model.ID)
-
-                        <input class="btn btn-danger" type="submit"  value="Delete" />
-
-                   }
-                </div>
-                <div class="col-md-4">
-                    <a href="@Url.Action("Update", "Tasks", new { Model.ID })" class="btn btn-primary ">
-                        <span>Update</span>
-                    </a>
-                </div>
-            </div>
+            @Html.Partial("_ActionButtonsMyTaks" , Model)
 
         </div>
     </div>

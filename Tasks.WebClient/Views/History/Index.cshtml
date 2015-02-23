@@ -1,0 +1,26 @@
+﻿@model IQueryable<Tasks.WebClient.Models.ViewModels.MyTaskViewModel>
+@{
+    ViewBag.Title = "Tasks history";
+}
+
+@if (Model.Count() > 0)
+{
+    <h3>Tasks history</h3>
+    <div class="row">
+        @Html.Partial("_ListOfMyTaskPartial", Model)
+    </div>
+
+    using (Html.BeginForm("ClearAll", "History"))
+    {
+        @Html.AntiForgeryToken()
+
+        <input class="btn btn-primary" type="submit" name="name" value="Clear all" />
+    }
+
+    <div class="row" id="results"></div>
+
+}
+else
+{
+    <h3>You have no completed tasks!</h3>
+}

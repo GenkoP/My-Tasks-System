@@ -99,11 +99,7 @@
     <Compile Include="ControllersTest\TestMyTasksController.cs" />
     <Compile Include="ControllersTest\BaseTestController.cs" />
     <Compile Include="ControllersTest\TestAddingDataInMyTasksController.cs" />
-    <Compile Include="DataTests\TestDeletingMyTasksFromData.cs" />
-    <Compile Include="DataTests\TestGetAllMyTaskFromRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataTests\TestUoWAdding.cs" />
-    <Compile Include="DataTests\BaseTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
