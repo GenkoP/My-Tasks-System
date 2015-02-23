@@ -56,14 +56,7 @@
         public ActionResult Create(MyTaskInputModel task, ICollection<SubTaskInputModel> subtasks)
         {
 
-            if (!ModelState.IsValid)
-            {
-                
-                var errors = ModelState.Values.SelectMany(x => x.Errors).ToArray();
-
-
-                return View("Error", errors);
-            }
+            this.ModelStateIsValid();
 
             var currentUserId = this.CurrentUser.GetUserId();
 
@@ -88,28 +81,11 @@
         }
 
         [HttpPost]
-       [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
 
-            if (id == null)
-	        {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-	        }
-
-            var currnetUserId = this.CurrentUser.GetUserId();
-
-            var task = this.Data.Tasks.SearchFor(x => x.UserID == currnetUserId && x.ID == id).FirstOrDefault();
-
-            if (task == null)
-            {
-                return HttpNotFound();
-            }
-            else
-            {
-                this.Data.Tasks.Delete(task);
-                this.Data.SaveChanges();
-            }
+            this.RenderDeleteTask(id);
 
             return RedirectToAction("Index");
 
@@ -123,6 +99,7 @@
             var task = this.Data.Tasks.SearchFor(x => x.UserID == currnetUserId && x.ID == id)
                 .Select(MyTaskViewModel.GetTasks)
                 .FirstOrDefault();
+
             if (task == null)
             {
                 return View("Error");
@@ -136,27 +113,16 @@
         [ValidateAntiForgeryToken]
         public ActionResult Update(MyTaskViewModel task, ICollection<SubTaskInputModel> inpSubtasks)
         {
-            if (!ModelState.IsValid)
-            {
-
-                var errors = ModelState.Values.SelectMany(x => x.Errors).ToArray();
-
-
-                return View("Error", errors);
-            }
-
 
             var currnetUserId = this.CurrentUser.GetUserId();
 
             var updatedTask = this.Data.Tasks.SearchFor(x => x.UserID == currnetUserId && x.ID == task.ID)
                 .FirstOrDefault();
 
-            if (task == null)
-            {
-                return HttpNotFound();
-            }
+            this.ObjectISNull(updatedTask);
 
             updatedTask.Title = task.Title;
+            updatedTask.IsCompleted = false;
             updatedTask.Description = task.Description;
             updatedTask.Priority = task.Priority;
             updatedTask.DateToEnd = task.DateToEnd;
@@ -181,15 +147,10 @@
 
             task.IsCompleted = true;
 
-            if (task == null)
-            {
-                return HttpNotFound();
-            }
-            else
-            {
-                this.Data.Tasks.Update(task);
-                this.Data.SaveChanges();
-            }
+            this.ObjectISNull(task);
+
+            this.Data.Tasks.Update(task);
+            this.Data.SaveChanges();
 
             return RedirectToAction("Index");
         }
@@ -206,7 +167,10 @@
 
                 var listSubtasks = new List<SubTask>();
 
-                foreach (var inpSubtask in inpSubtasks)
+
+                var notNullInputTasks = inpSubtasks.Where(x => x.SubtaskTitle != null);
+
+                foreach (var inpSubtask in notNullInputTasks)
                 {
 
                     listSubtasks.Add(new SubTask

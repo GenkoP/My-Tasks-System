@@ -24,11 +24,11 @@
         {
             string currentUserId = this.CurrentUser.GetUserId();
 
-            var currnetDate = DateTime.Now.Date;
+            var currentDate = DateTime.Now.Date;
 
             var allTasksForToday = this.Data.Tasks
                         .SearchFor(x => x.UserID == currentUserId
-                                   && DbFunctions.TruncateTime(x.DateToEnd) == DbFunctions.TruncateTime(currnetDate)
+                                   && DbFunctions.TruncateTime(x.DateToEnd) == DbFunctions.TruncateTime(currentDate)
                                    && x.IsCompleted == false
                                    )
                         .OrderByDescending(x => x.Priority)
