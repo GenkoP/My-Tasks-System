@@ -6,18 +6,17 @@ namespace Tasks.Tests.ControllersTest
     using System.Linq;
     using System.Data.Entity;
     using System.Collections.Generic;
+    using System.Linq.Expressions;
     using System.Web.Mvc;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using Moq;
+
     using Tasks.Models;
     using Tasks.Data.Repositories;
-    using Tasks.WebClient.Providers;
     using Tasks.WebClient.Controllers;
-    using Moq;
-    using System.Linq.Expressions;
-
-
+  
 
     [TestClass]
     public class TestMyTasksController : BaseTestController
@@ -35,7 +34,6 @@ namespace Tasks.Tests.ControllersTest
             var model = result.Model as IQueryable<DateTime>;
 
             Assert.IsNotNull(model, "The model is null!");
-            Assert.IsInstanceOfType(model, typeof(IQueryable<DateTime>));
         }
       
 

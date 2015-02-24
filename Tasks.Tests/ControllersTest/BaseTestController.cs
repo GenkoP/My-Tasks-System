@@ -11,7 +11,7 @@
 
     using Tasks.Models;
     using Tasks.Common;
-    using Tasks.WebClient.Providers;
+    using Tasks.WebClient.Infrastructure.Providers;
     using Tasks.Data.Repositories;
 
     [TestClass]

@@ -196,6 +196,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Infrastructure\Filters\ValidateModelAttribute.cs" />
     <Compile Include="App_Start\ViewEnginesConfiguration.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -218,8 +219,8 @@
     <Compile Include="Models\ViewModels\MyTaskViewModel.cs" />
     <Compile Include="Models\ViewModels\SubTasksViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\IUserIdProvider.cs" />
-    <Compile Include="Providers\UserIdProvider.cs" />
+    <Compile Include="Infrastructure\Providers\IUserIdProvider.cs" />
+    <Compile Include="Infrastructure\Providers\UserIdProvider.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
