@@ -13,7 +13,7 @@ namespace Tasks.WebClient.App_Start
 
     using Tasks.Data;
     using Tasks.Data.Repositories;
-    using Tasks.WebClient.Providers;
+    using Tasks.WebClient.Infrastructure.Providers;
 
     public static class NinjectWebCommon 
     {

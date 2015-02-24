@@ -5,12 +5,12 @@
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
-
-    using Tasks.Data.Repositories;
-    using Tasks.WebClient.Providers;
-    using Tasks.WebClient.Models.ViewModels;
     using System.Data.Entity;
 
+    using Tasks.Data.Repositories;
+    using Tasks.WebClient.Infrastructure.Providers;
+    using Tasks.WebClient.Models.ViewModels;
+    
     public class HomeController : BaseController
     {
 

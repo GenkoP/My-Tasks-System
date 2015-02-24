@@ -14,9 +14,9 @@ $(document).ready(function () {
 
         var count = subtaskWrapper.children().length;
 
-        if (count > 10) {
+        if (count >= 10) {
 
-            subtaskWrapper.append('<h1 class="error-message">Subtask count can not be to big from 10! </h1>')
+            $("#subtasksBtn").append('<h1 class="error-messages">Subtask count can not be to big from 10! </h1>')
 
         }
         else {

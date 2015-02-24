@@ -8,7 +8,7 @@
 
     using Tasks.Data.Repositories;
     using Tasks.WebClient.Models.ViewModels;
-    using Tasks.WebClient.Providers;
+    using Tasks.WebClient.Infrastructure.Providers;
 
   
     public class SearchingController : BaseController

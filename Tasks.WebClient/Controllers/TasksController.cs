@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Web;
+    using System.Net;
     using System.Web.Mvc;
     using System.Collections.Generic;
     using System.Data.Entity.Core.Objects;
@@ -10,11 +11,10 @@
 
     using Tasks.Models;
     using Tasks.Data.Repositories;
-    using Tasks.WebClient.Providers;
+    using Tasks.WebClient.Infrastructure.Providers;
     using Tasks.WebClient.Models.InputModels;
     using Tasks.WebClient.Models.ViewModels;
-    using System.Net;
-
+    using Tasks.WebClient.Infrastructure.Filters;
 
     public class TasksController : BaseController
     {
@@ -37,9 +37,9 @@
                                     && x.UserID == currentUserId
                                     && x.IsCompleted == false
                                )
-                    .GroupBy(x => x.DateToEnd)
-                    .Where(g => g.Count() >= 1)
-                    .Select(g => g.Key);
+                                .GroupBy(x => x.DateToEnd)
+                                .Where(g => g.Count() >= 1)
+                                .Select(g => g.Key);
 
 
             return View(currentTasks);
@@ -52,11 +52,10 @@
         }
 
         [HttpPost]
+        [ValidateModel]
         [ValidateAntiForgeryToken]
         public ActionResult Create(MyTaskInputModel task, ICollection<SubTaskInputModel> subtasks)
         {
-
-            this.ModelStateIsValid();
 
             var currentUserId = this.CurrentUser.GetUserId();
 
@@ -72,10 +71,10 @@
             };
 
             this.Data.Tasks.Add(newTask);
-            this.Data.SaveChanges();
-
+           
             this.CreateSubtasks(subtasks, newTask.ID);
 
+            this.Data.SaveChanges();
 
             return RedirectToAction("Index");
         }
@@ -100,16 +99,14 @@
                 .Select(MyTaskViewModel.GetTasks)
                 .FirstOrDefault();
 
-            if (task == null)
-            {
-                return View("Error");
-            }
+            this.ObjectIsNull(task);
 
             return View(task);
         }
 
 
         [HttpPost]
+        [ValidateModel]
         [ValidateAntiForgeryToken]
         public ActionResult Update(MyTaskViewModel task, ICollection<SubTaskInputModel> inpSubtasks)
         {
@@ -119,7 +116,7 @@
             var updatedTask = this.Data.Tasks.SearchFor(x => x.UserID == currnetUserId && x.ID == task.ID)
                 .FirstOrDefault();
 
-            this.ObjectISNull(updatedTask);
+            this.ObjectIsNull(updatedTask);
 
             updatedTask.Title = task.Title;
             updatedTask.IsCompleted = false;
@@ -145,9 +142,9 @@
 
             var task = this.Data.Tasks.SearchFor(x => x.UserID == currnetUserId && x.ID == id).FirstOrDefault();
 
-            task.IsCompleted = true;
+            this.ObjectIsNull(task);
 
-            this.ObjectISNull(task);
+            task.IsCompleted = true;
 
             this.Data.Tasks.Update(task);
             this.Data.SaveChanges();
@@ -159,18 +156,11 @@
         {
             if (inpSubtasks != null)
             {
-
-                if (inpSubtasks.Count > 10)
-                {
-                    throw new HttpException("To many requests!");
-                }
+                this.SubtasksIsValid(inpSubtasks);
 
                 var listSubtasks = new List<SubTask>();
 
-
-                var notNullInputTasks = inpSubtasks.Where(x => x.SubtaskTitle != null);
-
-                foreach (var inpSubtask in notNullInputTasks)
+                foreach (var inpSubtask in inpSubtasks)
                 {
 
                     listSubtasks.Add(new SubTask
@@ -185,8 +175,6 @@
                 {
                     this.Data.SubTasks.Add(subtask);
                 }
-
-                this.Data.SaveChanges();
 
             }
         }

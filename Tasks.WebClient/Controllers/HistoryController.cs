@@ -6,10 +6,11 @@
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
+
     using Tasks.Data.Repositories;
     using Tasks.Models;
     using Tasks.WebClient.Models.ViewModels;
-    using Tasks.WebClient.Providers;
+    using Tasks.WebClient.Infrastructure.Providers;
 
 
     public class HistoryController : BaseController

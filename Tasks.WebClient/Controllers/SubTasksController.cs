@@ -7,11 +7,12 @@
     using System.Web.Mvc;
     using System.Collections.Generic;
 
+    using Tasks.Models;
     using Tasks.Data.Repositories;
-    using Tasks.WebClient.Providers;
+    using Tasks.WebClient.Infrastructure.Providers;
     using Tasks.WebClient.Models.ViewModels;
     using Tasks.WebClient.Models.InputModels;
-    using Tasks.Models;
+
 
     public class SubTasksController : BaseController
     {
@@ -73,52 +74,6 @@
             return this.Json(subtasks, JsonRequestBehavior.AllowGet );
         }
 
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(ICollection<SubTaskInputModel> inpSubtasks, int taskID)
-        {
-
-            if (inpSubtasks.Count > 30)
-            {
-                throw new HttpException("To many requests!");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                throw new HttpException("ModelState is not valid!");
-            }
-
-            var userId = this.CurrentUser.GetUserId();
-
-            var task = this.Data.Tasks.SearchFor(x => x.UserID == userId && x.ID == taskID).FirstOrDefault();
-
-            var listSubtasks = new List<SubTask>();
-
-            foreach (var inpSubtask in inpSubtasks)
-            {
-
-                listSubtasks.Add( new SubTask
-                {
-                    Title = inpSubtask.SubtaskTitle,
-                    Priority = inpSubtask.SubtaskPriority,
-                    MyTaskID = task.ID
-                });
-            }
-
-            foreach (var subtask in listSubtasks)
-            {
-                this.Data.SubTasks.Add(subtask);
-            }
-
-            this.Data.SaveChanges();
-
-            var returnetCollectionOfSubtasks = this.Data.SubTasks
-                .SearchFor(x => x.MyTaskID == task.ID && x.MyTask.UserID == userId)
-                .Select(SubTasksViewModel.GetSubtasts);
-
-            return this.Json(returnetCollectionOfSubtasks);
-        }
 
     }
 }

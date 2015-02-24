@@ -1,4 +1,4 @@
-﻿namespace Tasks.WebClient.Providers
+﻿namespace Tasks.WebClient.Infrastructure.Providers
 {
     public interface ICurrentUserIdProvider
     {
