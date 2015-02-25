@@ -98,6 +98,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ControllersTest\TestDeletingMyTask.cs" />
     <Compile Include="ControllersTest\TestMyTasksController.cs" />
     <Compile Include="ControllersTest\BaseTestController.cs" />
     <Compile Include="ControllersTest\TestAddingDataInMyTasksController.cs" />

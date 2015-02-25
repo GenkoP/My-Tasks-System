@@ -57,11 +57,12 @@
         {
             var currnetUserId = this.CurrentUser.GetUserId();
 
-            var task = this.data.Tasks.SearchFor(x => x.UserID == currnetUserId && x.ID == id).FirstOrDefault();
+            var task = this.data.Tasks.All();
+            var delTask = task.Where(x => x.UserID == currnetUserId && x.ID == id).FirstOrDefault();
 
-            this.ObjectIsNull(task);
+            this.ObjectIsNull(delTask);
 
-            this.Data.Tasks.Delete(task);
+            this.Data.Tasks.Delete(delTask);
             this.Data.SaveChanges();
 
         }
