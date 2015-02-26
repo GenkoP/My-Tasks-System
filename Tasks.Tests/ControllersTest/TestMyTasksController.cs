@@ -54,8 +54,6 @@ namespace Tasks.Tests.ControllersTest
                     .Where(g => g.Count() >= 1)
                     .Select(g => g.Key);
 
-
-
              Assert.IsFalse(sortedList.Count() == 0);
              Assert.AreEqual(sortedList.ToList().Count, model.ToList().Count);
              CollectionAssert.AreEqual(sortedList.ToList(), model.ToList());
@@ -90,8 +88,8 @@ namespace Tasks.Tests.ControllersTest
             moqRepository.Setup(r => r.SearchFor(It.IsAny<Expression<Func<MyTask, bool>>>())).Returns(listOfMyTasks.AsQueryable());
             var repMyTasks = moqRepository.Object;
 
-            this.MoqTaskManagerData.Setup(u => u.Tasks).Returns(repMyTasks);
-            var data = this.MoqTaskManagerData.Object;
+            this.MockTaskManagerData.Setup(u => u.Tasks).Returns(repMyTasks);
+            var data = this.MockTaskManagerData.Object;
             return data;
         }
 

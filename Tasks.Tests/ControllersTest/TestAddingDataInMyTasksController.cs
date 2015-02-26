@@ -40,13 +40,13 @@
 
             this.listOfSubtasks = new List<SubTask>();
 
-            this.MoqTaskManagerData.Setup(x => x.Tasks.Add(It.Is<MyTask>(c => true))).Callback(() =>
+            this.MockTaskManagerData.Setup(x => x.Tasks.Add(It.Is<MyTask>(c => true))).Callback(() =>
             {
                 this.listOfMyTasks.Add(this.myTask);
 
             });
 
-            this.MoqTaskManagerData.Setup(data => data.SubTasks.Add(It.Is<SubTask>(x => true)))
+            this.MockTaskManagerData.Setup(data => data.SubTasks.Add(It.Is<SubTask>(x => true)))
                     .Callback(() => this.listOfSubtasks.Add(this.subtask));
 
         }
@@ -55,7 +55,7 @@
         public void CreateNewMyTasks_When_InputModelIsValid_AndSubtaskCollIsNull_ShouldTaskCounteinsInList()
         {
 
-            var data = this.MoqTaskManagerData.Object;
+            var data = this.MockTaskManagerData.Object;
 
             var taskContr = new TasksController(data, this.CurrentUserIdProvider);
 
@@ -74,7 +74,7 @@
         public void CreateMyTasksWithSubtasks_WhenTaskHave2Subtasks_ShouldReturnMyTaskAnd2SubTasks()
         {
 
-            var datas = this.MoqTaskManagerData.Object;
+            var datas = this.MockTaskManagerData.Object;
 
             var taskContr = new TasksController(datas, this.CurrentUserIdProvider);
 
@@ -102,7 +102,7 @@
         [ExpectedException(typeof(HttpException))]
         public void CreateMyTaskWithSubtasks_WhenSubtasksCountIsBigerFrom10_ShouldReturnException()
         {
-            var datas = this.MoqTaskManagerData.Object;
+            var datas = this.MockTaskManagerData.Object;
 
             var taskContr = new TasksController(datas, this.CurrentUserIdProvider);
 

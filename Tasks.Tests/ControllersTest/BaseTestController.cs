@@ -23,7 +23,8 @@
         private IList<MyTask> mytasksColl;
         private IRandomGenerator generator;
         private ICurrentUserIdProvider currentUserId;
-        private Mock<ITaskManagerData> moqTaskManagerData;
+        private Mock<ITaskManagerData> mockTaskManagerData;
+        private Mock<IGenericRepository<MyTask>> mockTaskRepos;
 
         [TestInitialize]
         public void MyTestMethod()
@@ -33,17 +34,24 @@
 
             this.mytasksColl = this.GenerateMytaskColl(USER_ID );
 
-            this.moqTaskManagerData = new Mock<ITaskManagerData>();
+            this.mockTaskRepos = new Mock<IGenericRepository<MyTask>>();
+
+            this.mockTaskManagerData = new Mock<ITaskManagerData>();
 
             this.MoqingCurrentUserId();
         }
 
-        protected IList<MyTask> MyTasksList { get { return this.mytasksColl; } }
+        protected IList<MyTask> MyTasksList 
+        {
+            get { return this.mytasksColl; }
+            set { this.mytasksColl = value; }
+        }
 
         protected ICurrentUserIdProvider CurrentUserIdProvider { get { return this.currentUserId; } }
 
-        protected Mock<ITaskManagerData> MoqTaskManagerData { get { return this.moqTaskManagerData; } }
+        protected Mock<ITaskManagerData> MockTaskManagerData { get { return this.mockTaskManagerData; } }
 
+        protected Mock<IGenericRepository<MyTask>> MockMyTaskRep { get { return this.mockTaskRepos; } }
             
         protected IList<MyTask> GenerateMytaskColl(string userId, int tasksTodayCount = 5)
         {
@@ -89,6 +97,7 @@
         {
             var task = new MyTask
             {
+                 ID = this.generator.RandomNumber(1,1000),
                 Title = this.generator.RandomMixedString(7, 20),
                 DateOnCreate = DateTime.Now,
                 DateToEnd = DateTime.Now.AddDays(this.generator.RandomNumber(dateMin, dateMax)),

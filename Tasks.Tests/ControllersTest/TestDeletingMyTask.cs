@@ -45,7 +45,7 @@
 
            var repObj = moqRepos.Object;
 
-           this.MoqTaskManagerData.Setup(data => data.Tasks).Returns(repObj);
+           this.MockTaskManagerData.Setup(data => data.Tasks).Returns(repObj);
 
         }
         
@@ -53,7 +53,7 @@
         public void DeleteMyTask_WhenMyTaskExistInDatabase_ShoudeRemoveMyTaskFromList()
         {
 
-            var taskData = this.MoqTaskManagerData.Object;
+            var taskData = this.MockTaskManagerData.Object;
 
             var tasksController = new TasksController(taskData , this.CurrentUserIdProvider);
 
@@ -69,7 +69,7 @@
         {
            
 
-            var taskData = this.MoqTaskManagerData.Object;
+            var taskData = this.MockTaskManagerData.Object;
 
             var tasksController = new TasksController(taskData, this.CurrentUserIdProvider);
 
@@ -90,7 +90,7 @@
             this.myTaskColl.Add(taskOnOtherUser);
 
 
-            var taskData = this.MoqTaskManagerData.Object;
+            var taskData = this.MockTaskManagerData.Object;
 
             var tasksController = new TasksController(taskData, this.CurrentUserIdProvider);
 

@@ -102,6 +102,7 @@
     <Compile Include="ControllersTest\TestMyTasksController.cs" />
     <Compile Include="ControllersTest\BaseTestController.cs" />
     <Compile Include="ControllersTest\TestAddingDataInMyTasksController.cs" />
+    <Compile Include="ControllersTest\TestUpdatingMyTasks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

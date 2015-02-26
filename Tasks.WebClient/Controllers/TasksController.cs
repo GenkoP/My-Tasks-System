@@ -95,7 +95,7 @@
         {
             var currnetUserId = this.CurrentUser.GetUserId();
 
-            var task = this.Data.Tasks.SearchFor(x => x.UserID == currnetUserId && x.ID == id)
+            var task = this.Data.Tasks.All().Where(x => x.UserID == currnetUserId && x.ID == id)
                 .Select(MyTaskViewModel.GetTasks)
                 .FirstOrDefault();
 
@@ -108,12 +108,12 @@
         [HttpPost]
         [ValidateModel]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(MyTaskViewModel task, ICollection<SubTaskInputModel> inpSubtasks)
+        public ActionResult Update(MyTaskInputModel task, ICollection<SubTaskInputModel> inpSubtasks)
         {
 
             var currnetUserId = this.CurrentUser.GetUserId();
 
-            var updatedTask = this.Data.Tasks.SearchFor(x => x.UserID == currnetUserId && x.ID == task.ID)
+            var updatedTask = this.Data.Tasks.All().Where(x => x.UserID == currnetUserId && x.ID == task.ID)
                 .FirstOrDefault();
 
             this.ObjectIsNull(updatedTask);

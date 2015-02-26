@@ -12,6 +12,8 @@
     public class MyTaskInputModel
     {
 
+        public int ID { get; set; }
+
         [Required]
         [DisplayName("Task title:")]
         [StringLength(30, MinimumLength = 2)]
