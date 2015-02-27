@@ -17,8 +17,6 @@
     using Tasks.WebClient.Models.InputModels;
     using Tasks.WebClient.Models.ViewModels;
 
-
-
     [TestClass]
     public class TestUpdatingMyTasks : BaseTestController
     {
@@ -50,9 +48,13 @@
 
             var result = controller.Update(this.updatedTask.ID) as ViewResult;
 
+            
+
+            var nameView = result.ViewName;
+
             var model = result.Model as MyTaskViewModel;
 
-
+            
             Assert.AreEqual(model.Title, this.updatedTask.Title);
             Assert.AreEqual(model.ID, this.updatedTask.ID);
 
@@ -122,7 +124,11 @@
 
             var controller = new TasksController(this.MockTaskManagerData.Object, this.CurrentUserIdProvider);
 
+       
+
             var result = controller.Update(inputMyTaskModel, null);
+
+            
 
             Assert.AreEqual(inputMyTaskModel.Title, taskForUpdate.Title);
             Assert.AreEqual(inputMyTaskModel.Priority, taskForUpdate.Priority);
