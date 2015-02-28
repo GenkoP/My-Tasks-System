@@ -26,7 +26,7 @@ namespace Tasks.Data.Migrations
         protected override void Seed(DataContext context)
         {
 
-       
+           // this.AddData();
 
         }
 
